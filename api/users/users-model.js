@@ -16,7 +16,7 @@ function findById(id) {
 
 async function add({username, password}){
     const [id] = await db('users').insert({username, password})
-    return await findById(id)
+    return await findById(id).first()
 }
 
 module.exports = {

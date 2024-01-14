@@ -20,6 +20,7 @@ router.post('/register', validateUser, checkForUsername, async (req, res, next) 
     const addUser = {username, password: hash}
     Users.add(addUser)
         .then(user => {
+          console.log(user)
             res.status(201).json(user)
         })
         .catch(next)

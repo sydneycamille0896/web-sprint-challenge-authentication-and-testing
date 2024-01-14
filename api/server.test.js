@@ -25,14 +25,14 @@ describe('[POST] /register', () => {
   it('should return the newly created user', async () => {
     const res = await request(server).post('/api/auth/register').send(samuel)
     //console.log('samuel: ', samuel)
-    //console.log('response body: ' , res.body[0])
-    expect(res.body[0].username).toBe('samuel')
+    console.log('response body: ' , res.body)
+    expect(res.body.username).toBe('samuel')
   })
   it('should return the user list with correct length after new user added', async () => {
     const res = await request(server).post('/api/auth/register').send(samuel)
     //console.log('samuel: ', samuel)
     //console.log('response body: ' , res.body[0])
-    expect(res.body[0].username).toBe('samuel')
+    expect(res.body.username).toBe('samuel')
 
     const res2 = await request(server).get('/api/users')
     expect(res2.body).toHaveLength(1)
