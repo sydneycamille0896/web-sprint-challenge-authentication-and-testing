@@ -25,7 +25,7 @@ describe('[POST] /register', () => {
   it('should return the newly created user', async () => {
     const res = await request(server).post('/api/auth/register').send(samuel)
     //console.log('samuel: ', samuel)
-    console.log('response body: ' , res.body)
+    console.log('REGISTER Response Body: ' , res.body)
     expect(res.body.username).toBe('samuel')
   })
   it('should return the user list with correct length after new user added', async () => {
@@ -49,15 +49,18 @@ describe('[POST] /login', () => {
 
   })
   it('should produce a json web token upon valid login', async () => {
-    await request(server).post('/api/auth/register').send(samuel)
+    const newUser = await request(server).post('/api/auth/register').send(samuel)
+    console.log('TEST LOG, register new user response: ', newUser)
 
     const res = await request(server).post('/api/auth/login').send(samuel)
+    console.log('TEST LOG, login response: ', res.body)
     expect(res.body.token).toBeDefined()
+
     const jwtToken = res.body.token
-    //console.log('test log login token: ', jwtToken)
+    console.log('TEST LOG, login token: ', jwtToken)
 
     const getRes = await request(server).get('/api/jokes').set(`Authorization`, `Bearer ${jwtToken}`)
-    console.log('test log jokes', getRes)
+    console.log('TEST LOG, jokes response: ', getRes)
     //console.log('Log Test Jokes Body: ', getRes.body)
     expect(getRes.statusCode).toBe(200)
   })
