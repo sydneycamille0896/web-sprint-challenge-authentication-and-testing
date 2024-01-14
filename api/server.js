@@ -1,4 +1,4 @@
-const path = require('path')
+//const path = require('path')
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -13,7 +13,7 @@ const server = express();
 
 server.use(helmet());
 server.use(cors());
-server.use(express.static(path.join(__dirname, '../client')))
+//server.use(express.static(path.join(__dirname, '../client')))
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
@@ -21,7 +21,8 @@ server.use('/api/jokes', restrict, jokesRouter); // only logged-in users should 
 server.use('/api/users', usersRouter)
 
 server.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'index.html'))
+    //res.sendFile(path.join(__dirname, '../client', 'index.html'))
+    res.json({message: 'server reached'})
   })
 
 server.use((err, req, res, next) => { // eslint-disable-line
