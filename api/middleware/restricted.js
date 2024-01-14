@@ -18,7 +18,8 @@ module.exports = (req, res, next) => {
   */
 
 
-  const token = req.headers.authorization?.split(' ')[1]
+  //const token = req.headers.authorization?.split(' ')[1]
+  const token = req.headers.authorization
   console.log('Received token:', token); // Log the token
   console.log('Headers:', req.headers); // Log all headers
   console.log(token)
