@@ -16,11 +16,11 @@ router.post('/register', validateUser, checkForUsername, async (req, res, next) 
   //     res.status(201).json(saved)
   //   })
   //   .catch(next)
-  console.log(password, hash)
+  console.log('Router Register Entered Password: ', password,'Router Register Hashed Password: ', hash)
     const addUser = {username, password: hash}
     Users.add(addUser)
         .then(user => {
-          console.log(user)
+          console.log('Router Registered User: ', user)
             res.status(201).json(user)
         })
         .catch(next)
@@ -106,15 +106,15 @@ router.post('/login', validateUser, checkIfUserExists, async (req, res, next) =>
       .then(([user]) => {
         if( user && bcrypt.compareSync(password,  user.password)) {
           const token = buildToken(user)
-          console.log('token: ' , token)
+          console.log('Router Login token: ' , token)
           res.status(200).json({ message: `welcome, ${username}`, token})
         } else {
-          console.log('router: invalid credentials')
+          console.log('Router: invalid credentials')
           next({ status: 401, message: 'invalid credentials' })
         }
       })
       .catch(err=>{
-        console.log(err)
+        console.log('Error: ', err)
         next(err)
       })
 });
