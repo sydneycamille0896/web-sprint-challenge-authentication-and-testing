@@ -59,7 +59,7 @@ describe('[POST] /login', () => {
     const jwtToken = res.body.token
     console.log('TEST LOG, login token: ', jwtToken)
 
-    const getRes = await request(server).get('/api/jokes').set(`Authorization`, `Bearer ${jwtToken}`)
+    const getRes = await request(server).get('/api/jokes').set(`Authorization`, `${jwtToken}`)
     console.log('TEST LOG, jokes response: ', getRes)
     //console.log('Log Test Jokes Body: ', getRes.body)
     expect(getRes.statusCode).toBe(200)
